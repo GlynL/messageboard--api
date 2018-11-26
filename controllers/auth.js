@@ -30,3 +30,16 @@ exports.signup = async function(req, res, next) {
 exports.login = function(req, res, next) {
   res.json({ token: tokenForUser(req.user) });
 };
+
+// just for testing
+exports.removeUser = async function(req, res, next) {
+  const { key, email } = req.query;
+  if (key !== "secret")
+    return res.status(401).json({ error: "Not authorized" });
+  try {
+    await User.findOneAndDelete({ email });
+    return res.send("successfully removed");
+  } catch (err) {
+    return next(err);
+  }
+};
