@@ -32,3 +32,15 @@ exports.newBoard = async function(req, res, next) {
   }
   res.send("Board created successfully");
 };
+
+// for testing
+exports.removeBoard = async function(req, res, next) {
+  const { name, key } = req.query;
+  if (key !== "secret") return res.status(401).json({ error: "unauthorized" });
+  try {
+    await Board.findOneAndDelete({ name });
+    return res.send("successfully removed");
+  } catch (err) {
+    next(err);
+  }
+};
