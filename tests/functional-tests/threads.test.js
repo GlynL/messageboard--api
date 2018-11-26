@@ -36,7 +36,7 @@ describe("create thread POST /api/:board/threads", () => {
     });
     expect(response.status).toBe(200);
     const data = await response.json();
-    id = data.threads[0]._id;
+    id = data.threads[1]._id;
   });
 
   test("invalid board", async () => {
