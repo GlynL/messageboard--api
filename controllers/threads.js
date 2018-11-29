@@ -13,7 +13,6 @@ exports.createThread = async function(req, res, next) {
   // grab board and token from request
   const board = req.board;
   const token = req.headers.authorization;
-  console.log(board);
   // check valid board
   if (!board) return res.status(422).json({ error: "Invalid board name." });
   try {
