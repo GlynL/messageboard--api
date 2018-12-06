@@ -34,7 +34,11 @@ exports.addReply = async function(req, res, next) {
     thread.replies.push(reply);
     // update model
     const updatedBoard = await board.save();
-    res.json({ status: "Reply added successfully", thread });
+    res.json({
+      status: "Reply added successfully",
+      thread,
+      board: updatedBoard
+    });
   } catch (err) {
     next(err);
   }
