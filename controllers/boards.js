@@ -2,8 +2,14 @@ const Board = require("../models/Board");
 
 exports.getBoards = async function(req, res, next) {
   try {
-    // find all books
-    const boards = await Board.find({});
+    let boards;
+    if (req.query.name) {
+      // find one board
+      boards = await Board.findOne({ name: req.query.name });
+    } else {
+      // find all boards
+      boards = await Board.find({});
+    }
     return res.json(boards);
   } catch (err) {
     next(err);
